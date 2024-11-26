@@ -7,10 +7,26 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/plagiarism
   jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /plagiarism-detector-server.html
+
+openapi:
+  service:
+    api-docs: plagiarism-detector-server
+    server: http://localhost:${server.port}
+    title: Plagiarism Detector Document
+    version: 1.0.0
 
 plagiarism-search:
   host: https://plagiarismsearch.com/api/v3
   token: totruongchinh@gmail.com:iqsq17umPX5hJmqMleQSwLHpN6bW7Pdc4eWNLUuCMmwruUnv-214671387
+
+server:
+  port: 8080

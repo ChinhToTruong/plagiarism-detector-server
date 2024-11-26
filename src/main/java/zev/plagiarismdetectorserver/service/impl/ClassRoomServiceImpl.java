@@ -2,127 +2,88 @@ package zev.plagiarismdetectorserver.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import zev.plagiarismdetectorserver.dto.request.ClassRoomCreateRequest;
 import zev.plagiarismdetectorserver.entity.ClassRoom;
-import zev.plagiarismdetectorserver.entity.Profile;
+import zev.plagiarismdetectorserver.entity.User;
+import zev.plagiarismdetectorserver.exception.ClassNotFound;
+import zev.plagiarismdetectorserver.exception.ClassRoomExited;
+import zev.plagiarismdetectorserver.exception.UserNotFound;
 import zev.plagiarismdetectorserver.repository.ClassRoomRepository;
-import zev.plagiarismdetectorserver.repository.ProfileRepository;
+import zev.plagiarismdetectorserver.repository.UserRepository;
 import zev.plagiarismdetectorserver.service.ClassRoomService;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ClassRoomServiceImpl implements ClassRoomService {
     private final ClassRoomRepository classRoomRepository;
-    private final ProfileRepository profileRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     @Override
-    public ClassRoom createClassRoom(ClassRoomCreateRequest request) {
+    public void createNewClassRoom(ClassRoomCreateRequest request) {
+        boolean isClassExited = classRoomRepository.findClassRoomByName(request.getName()).isPresent();
+
+        if (isClassExited) {
+            throw new ClassRoomExited();
+        }
         try {
-            Optional<ClassRoom> existClassRoom = classRoomRepository.findClassRoomByName(request.getName());
-            if (existClassRoom.isPresent()) {
-                throw new RuntimeException("class room already exists");
-            }
-            ClassRoom newClassRoom = ClassRoom.builder()
+            ClassRoom classRoom = ClassRoom.builder()
                     .name(request.getName())
                     .description(request.getDescription())
                     .build();
-            return classRoomRepository.save(newClassRoom);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    /**
-     * userid la profileId
-     * */
-    @Transactional
-    @Override
-    public ClassRoom addUserToClassRoomByClassRoomId(String classRoomId, String userId) {
-        try {
-            Optional<Profile> existedProfile = profileRepository.findById(userId);
-            Optional<ClassRoom> existClassRoom = classRoomRepository.findById(classRoomId);
-            if (existedProfile.isEmpty()) {
-                throw new RuntimeException("profile not found");
-            }
-            if (existClassRoom.isEmpty()) {
-                throw new RuntimeException("classroom not found");
-            }
-            Profile profile = existedProfile.get();
-            ClassRoom classRoom = existClassRoom.get();
-            classRoom.getUsers().add(profile);
-            return classRoomRepository.save(classRoom);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Transactional
-    @Override
-    public void deleteUserFromClassRoomByClassRoomId(String classRoomId, String userId) {
-        try {
-            Optional<Profile> existedProfile = profileRepository.findById(userId);
-            Optional<ClassRoom> existClassRoom = classRoomRepository.findById(classRoomId);
-            if (existedProfile.isEmpty()) {
-                throw new RuntimeException("profile not found");
-            }
-            if(existClassRoom.isEmpty()) {
-                throw new RuntimeException("user not found");
-            }
-            Profile profile = existedProfile.get();
-            ClassRoom classRoom = existClassRoom.get();
-            classRoom.getUsers().remove(profile);
             classRoomRepository.save(classRoom);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.info("ClassRoom created: {}", classRoom);
+        }
+        catch (Exception e) {
+            log.error("Creat class room failed");
+            throw e;
         }
     }
 
     @Override
-    public Set<Profile> getUsersByClassRoomId(String classRoomId) {
-        Optional<ClassRoom> existClassRoom = classRoomRepository.findById(classRoomId);
-        if (existClassRoom.isEmpty()){
-            throw new RuntimeException("class room not found");
-        }
-        return existClassRoom.get().getUsers();
-    }
-
-    @Override
-    public Set<ClassRoom> getClassRoomsByUserId(String userId) {
-        Optional<Profile> existedProfile = profileRepository.findById(userId);
-        if(existedProfile.isEmpty()) {
-            throw new RuntimeException("profile not found");
-        }
-        return existedProfile.get().getClassRooms();
+    public void updateClassRoom(ClassRoom classRoom) {
 
     }
 
     @Override
-    public void deleteClassRoomByClassRoomId(String classRoomId) {
+    public void deleteClassRoom(String classRoomId) {
+
+    }
+
+    @Override
+    public List<ClassRoom> getClassRoom() {
+        return classRoomRepository.findAll();
+    }
+
+    @Override
+    public ClassRoom getClassRoom(String classRoomId) {
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public void addUserToClassRoom(String classRoomId, String userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFound::new);
+        ClassRoom classRoom = classRoomRepository.findById(classRoomId).orElseThrow(ClassNotFound::new);
         try{
-            Optional<ClassRoom> existClassRoom = classRoomRepository.findById(classRoomId);
-            if(existClassRoom.isEmpty()) {
-                throw new RuntimeException("class room not found");
-            }
-            classRoomRepository.delete(existClassRoom.get());
-
-        }catch (Exception e) {
-            throw new RuntimeException(e);
+            user.getClassRooms().add(classRoom);
+            userRepository.save(user);
+            log.info("User {} added to classRoom {}", userId, classRoom);
+        }
+        catch (Exception e) {
+            log.error("Add user to class room failed");
+            throw e;
         }
     }
 
     @Override
-    public ClassRoom updateClassRoomByClassRoomId(String classRoomId, ClassRoom classRoom) {
-        Optional<ClassRoom> existClassRoom = classRoomRepository.findById(classRoomId);
-        if(existClassRoom.isEmpty()) {
-            throw new RuntimeException("class room not found");
-        }
-        existClassRoom.get().setName(classRoom.getName());
-        existClassRoom.get().setDescription(classRoom.getDescription());
-        return classRoomRepository.save(existClassRoom.get());
+    public void removeUserFromClassRoom(String classRoomId, String userId) {
+
     }
 }

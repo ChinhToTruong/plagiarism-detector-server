@@ -15,8 +15,14 @@ public class AppConfig {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
+                        .allowedHeaders("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             }
         };
     }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer(){
+//        return webSecurity -> webSecurity.ignoring()
+//                .requestMatchers("/v3/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**");
+//    }
 }

@@ -1,5 +1,7 @@
 package zev.plagiarismdetectorserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,13 +16,15 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClassRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
     private String name;
     private String description;
-    @ManyToMany(mappedBy = "classRooms", fetch = FetchType.LAZY, targetEntity = Profile.class)
-    Set<Profile> users;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "classRooms")
+    private Set<User> users;
 }

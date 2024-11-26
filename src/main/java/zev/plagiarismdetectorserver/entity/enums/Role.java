@@ -11,9 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public enum Role {
     @JsonProperty("student")
-    STUDENT("st_01"),
+    STUDENT,
     @JsonProperty("teacher")
-    TEACHER("t_01");
+    TEACHER;
 
-    private final String roleCode;
 }

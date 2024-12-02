@@ -1,0 +1,48 @@
+server:
+  port: ${PORT}
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/${DB_NAME}
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: true
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USER_NAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+      smtp:
+        starttls:
+          enable: true
+        required: true
+    from: ${EMAIL_FROM}
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /plagiarism-detector-server.html
+
+openapi:
+  service:
+    api-docs: plagiarism-detector-server
+    server: http://localhost:${server.port}
+    title: Plagiarism Detector Document
+    version: 1.0.0
+
+plagiarism-search:
+  host: ${PLAGIARISM_HOST}
+  token: ${PLAGIARISM_EMAIL}:${PLAGIARISM_TOKEN}
+
+

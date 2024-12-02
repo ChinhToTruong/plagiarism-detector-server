@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Configuration
-@Profile({"dev", "test"})
+@Profile("!prod")
 public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI(@Value("${openapi.service.title}") String title,

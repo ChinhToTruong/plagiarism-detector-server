@@ -2,7 +2,6 @@ package zev.plagiarismdetectorserver.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,13 +15,13 @@ import zev.plagiarismdetectorserver.service.PlagiarismService;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Transactional
 public class PlagiarismSearchServiceImpl implements PlagiarismService {
     private final PlagiarismSearchClient plagiarismSearchClient;
 
     @Value("${plagiarism-search.token}")
     private String token;
-    
+
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public AIDetectReportResponse submitAiCheckReport(AIDetectRequest text, MultipartFile file) {
 
@@ -46,6 +45,7 @@ public class PlagiarismSearchServiceImpl implements PlagiarismService {
         return plagiarismSearchClient.getAiReportById(token, id);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public AIDetectReportResponse submitCopyCheckReport(AIDetectRequest text, MultipartFile file) {
         if (text == null && file == null) {

@@ -2,10 +2,10 @@ package zev.plagiarismdetectorserver.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.Getter;
 import zev.plagiarismdetectorserver.entity.enums.Role;
 
-@Data
+@Getter
 public class AddUserRequest {
     @NotBlank(message = "email không được để trống.")
     @Email(message = "email chưa đúng định dạng. Vui lòng nhập lại.")

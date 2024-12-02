@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     public void createUser(AddUserRequest request) {
         boolean isExistedUser = userRepository.findByEmail(request.getEmail()).isPresent();
         if (isExistedUser) throw new UserAlreadyExisted();
-
         try {
             User user = User.builder()
                     .email(request.getEmail())
@@ -110,6 +109,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseData<?> searchUserAdvance(Pageable pageable, String[] classroom, String[] user) {
         return new ResponseData<>("thanh cong", searchRepository.searchSpecification(pageable, classroom, user));
+    }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(UserNotFound::new);
     }
 }

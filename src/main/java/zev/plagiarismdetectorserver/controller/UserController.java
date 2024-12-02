@@ -1,17 +1,14 @@
 package zev.plagiarismdetectorserver.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import zev.plagiarismdetectorserver.dto.request.AddUserRequest;
 import zev.plagiarismdetectorserver.dto.request.UpdateProfileUserRequest;
 import zev.plagiarismdetectorserver.dto.response.ResponseData;
 import zev.plagiarismdetectorserver.entity.User;
-import zev.plagiarismdetectorserver.repository.SearchRepository;
 import zev.plagiarismdetectorserver.service.UserService;
 import java.util.List;
 
@@ -73,16 +70,6 @@ public class UserController {
     ){
         log.info("Searching users: {}, {}", search, classroom);
         return userService.searchUser(pageNo, pageSize,sortBy, classroom, search);
-    }
-
-    @GetMapping("/search-user/advance")
-    public ResponseData<?> searchUsersAndAdvance(
-            Pageable pageable,
-            @RequestParam(required = false) String[] classroom,
-            @RequestParam(required = false) String[] user
-    ){
-        log.info("Searching users: {}, {}", user, classroom);
-        return userService.searchUserAdvance(pageable, classroom, user);
     }
 
 }

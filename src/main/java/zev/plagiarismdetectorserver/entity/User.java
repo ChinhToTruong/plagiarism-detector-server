@@ -1,13 +1,10 @@
 package zev.plagiarismdetectorserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.w3c.dom.stylesheets.LinkStyle;
 import zev.plagiarismdetectorserver.entity.enums.Gender;
 import zev.plagiarismdetectorserver.entity.enums.Role;
 
@@ -18,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "user")
-@Table(name = "java_user_01")
+@Table(name = "java_user_001")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -65,4 +65,10 @@ public class GlobalException {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.CLASS_EXITED.getErrors());
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(UserInClassRoom.class)
+    public ErrorResponse handleUserInClass(UserInClassRoom ex){
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.USER_IN_CLASS.getErrors());
+    }
+
 }

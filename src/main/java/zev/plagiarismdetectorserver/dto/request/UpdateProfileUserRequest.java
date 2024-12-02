@@ -3,13 +3,14 @@ package zev.plagiarismdetectorserver.dto.request;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import zev.plagiarismdetectorserver.entity.enums.Gender;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpdateProfileUserRequest {
     @NotBlank(message = "first name khong duoc de trong")

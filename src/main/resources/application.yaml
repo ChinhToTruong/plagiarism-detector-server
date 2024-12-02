@@ -7,9 +7,23 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/plagiarism
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: none
     generate-ddl: true
     show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: totruongchinh@gmail.com
+    password: kcbhtwgkghmnkvku
+    properties:
+      mail:
+        smtp:
+          auth: true
+      smtp:
+        starttls:
+          enable: true
+        required: true
+    from: totruongchinh@gmail.com
 springdoc:
   api-docs:
     enabled: true

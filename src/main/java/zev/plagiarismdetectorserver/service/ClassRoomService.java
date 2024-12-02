@@ -1,13 +1,14 @@
 package zev.plagiarismdetectorserver.service;
 
 import zev.plagiarismdetectorserver.dto.request.ClassRoomCreateRequest;
+import zev.plagiarismdetectorserver.dto.request.UpdateClassRoomRequest;
 import zev.plagiarismdetectorserver.entity.ClassRoom;
 
 import java.util.List;
 
 public interface ClassRoomService {
     void createNewClassRoom(ClassRoomCreateRequest request);
-    void updateClassRoom(ClassRoom classRoom);
+    void updateClassRoom(String classRoomId, UpdateClassRoomRequest request);
     void deleteClassRoom(String classRoomId);
     List<ClassRoom> getClassRoom();
     ClassRoom getClassRoom(String classRoomId);

@@ -14,8 +14,7 @@ public interface UserService {
     void deleteUserByUserId(String userId);
     List<User> getUsers();
     User getUserById(String userId);
-
     ResponseData<?> searchUser(int pageNo, int pageSize, String sortBy,String classroom, String[] search);
-
     ResponseData<?> searchUserAdvance(Pageable pageable, String[] classroom, String[] user);
+    User getUserByEmail(String email);
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Tag(name = "User Controller")
-@Slf4j
+@Slf4j(topic = "User")
 public class UserController {
     private final UserService userService;
 

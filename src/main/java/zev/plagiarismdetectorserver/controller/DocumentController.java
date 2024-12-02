@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/document")
 @RequiredArgsConstructor
 @Tag(name = "Document Controller")
-@Slf4j
+@Slf4j(topic = "Document")
 public class DocumentController {
     private final DocumentService documentService;
 

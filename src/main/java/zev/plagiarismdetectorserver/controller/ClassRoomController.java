@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/classroom")
-@Slf4j
+@Slf4j(topic = "ClassRoom")
 public class ClassRoomController {
     private final ClassRoomService classRoomService;
 

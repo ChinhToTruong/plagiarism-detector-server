@@ -1,13 +1,13 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT}
 spring:
   application:
     name: plagiarism-detector-server
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USER_NAME:root}
-    password: ${DB_PASSWORD:root}
-    url: jdbc:mysql://localhost:3306/${DB_NAME:plagiarism}
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/${DB_NAME}
   jpa:
     hibernate.ddl-auto: none
     generate-ddl: true
@@ -15,8 +15,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL_USER_NAME:totruongchinh@gmail.com}
-    password: ${EMAIL_PASSWORD:kcbhtwgkghmnkvku}
+    username: ${EMAIL_USER_NAME}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -25,7 +25,7 @@ spring:
         starttls:
           enable: true
         required: true
-    from: ${EMAIL_FROM:totruongchinh@gmail.com}
+    from: ${EMAIL_FROM}
 springdoc:
   api-docs:
     enabled: true
@@ -41,7 +41,7 @@ openapi:
     version: 1.0.0
 
 plagiarism-search:
-  host: ${PLAGIARISM_HOST:https://plagiarismsearch.com/api/v3}
-  token: ${PLAGIARISM_EMAIL:totruongchinh@gmail.com}:${PLAGIARISM_TOKEN:iqsq17umPX5hJmqMleQSwLHpN6bW7Pdc4eWNLUuCMmwruUnv-214671387}
+  host: ${PLAGIARISM_HOST}
+  token: ${PLAGIARISM_EMAIL}:${PLAGIARISM_TOKEN}
 
 

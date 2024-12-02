@@ -71,4 +71,15 @@ public class GlobalException {
         return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.USER_IN_CLASS.getErrors());
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DocumentNotFound.class)
+    public ErrorResponse handleDocumentNotFound(DocumentNotFound ex){
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.DOCUMENT_NOT_FOUND.getErrors());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DocumentExited.class)
+    public ErrorResponse handleDocumentExited(DocumentExited ex){
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.DOCUMENT_EXITED.getErrors());
+    }
 }

@@ -49,4 +49,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "classroom_id")
     )
     private List<ClassRoom> classRooms;
+
+    @OneToMany(targetEntity = Document.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Document> documents;
 }

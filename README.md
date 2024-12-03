@@ -24,13 +24,9 @@
 
 ## Package application
 ***
-- Clean application
+- Clean and package application
 ```bash
-    mvn spring-boot:clean
-```
-- Package application
-```bash
-    mvn spring-boot:package
+    mvn clean package -P test|dev|prod
 ```
 ## Run application
 ***
@@ -40,5 +36,5 @@
 ```
 - Docker
 ```bash
-    docker-compose up 
+    docker-compose up -d --build
 ```

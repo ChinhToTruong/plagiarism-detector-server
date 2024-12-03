@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+/.env
+/.docker/
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,4 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/.env
+.docker
+data
+db.sql

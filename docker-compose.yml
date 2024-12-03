@@ -1,0 +1,35 @@
+
+services:
+  springboot-app:
+    container_name: plagiarism-detector
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: on-failure
+    env_file:
+      - .env
+    networks:
+      - spring-backend-network
+    depends_on:
+      - mysql
+      - redis
+  mysql:
+    image: mysql:8
+    restart: on-failure
+    environment:
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: plagiarism
+  redis:
+    image: redis:6-alpine
+    restart: on-failure
+
+networks:
+  spring-backend-network:
+    driver: bridge
+#volumes:
+#  - app-volume:
+#  - db-volume:
+#  - redis-volume:

@@ -1,35 +1,37 @@
 
 services:
-  springboot-app:
-    container_name: plagiarism-detector
-    build:
-      context: .
-      dockerfile: Dockerfile
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=plagiarism
+      - MYSQL_ROOT_PASSWORD=root
     ports:
-      - "8080:80"
-    restart: on-failure
+      - '4306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+#      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+    networks:
+      - default
+
+  backend-service:
+    container_name: backend-service
+    build:
+      context: ./
+      dockerfile: Dockerfile
     env_file:
       - .env
+    ports:
+      - "8080:8080"
     networks:
-      - spring-backend-network
-    depends_on:
-      - mysql
-      - redis
-  mysql:
-    image: mysql:8
-    restart: on-failure
-    environment:
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: plagiarism
-  redis:
-    image: redis:6-alpine
-    restart: on-failure
+      - default
 
 networks:
-  spring-backend-network:
-    driver: bridge
-#volumes:
-#  - app-volume:
-#  - db-volume:
-#  - redis-volume:
+  default:
+    name: backend-service
+
+volumes:
+  mysql_data:

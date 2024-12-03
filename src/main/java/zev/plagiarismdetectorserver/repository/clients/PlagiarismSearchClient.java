@@ -9,7 +9,7 @@ import zev.plagiarismdetectorserver.dto.response.AIDetectReportResponse;
 
 @FeignClient(
         value = "plagiarism-search",
-        url = "${plagiarism-search.host}"
+        url = "${plagiarism-search.host:https://plagiarismsearch.com/api/v3}"
 )
 public interface PlagiarismSearchClient {
     // Api plagiarism detect with ai-generated method

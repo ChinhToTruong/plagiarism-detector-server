@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USER_NAME:root}
     password: ${MYSQL_PASSWORD:root}
-    url: jdbc:mysql://mysql:4306/plagiarism
+    url: jdbc:mysql://localhost:3306/plagiarism
   jpa:
     hibernate.ddl-auto: create
     generate-ddl: true

@@ -10,6 +10,7 @@ import zev.plagiarismdetectorserver.dto.request.AddUserRequest;
 import zev.plagiarismdetectorserver.dto.request.UpdateProfileUserRequest;
 import zev.plagiarismdetectorserver.dto.response.ResponseData;
 import zev.plagiarismdetectorserver.entity.User;
+import zev.plagiarismdetectorserver.entity.enums.Role;
 import zev.plagiarismdetectorserver.exception.UserAlreadyExisted;
 import zev.plagiarismdetectorserver.exception.UserNotFound;
 import zev.plagiarismdetectorserver.repository.SearchRepository;
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
             User user = User.builder()
                     .email(request.getEmail())
                     .password(request.getPassword())
-                    .role(request.getRole())
+                    .role(Role.valueOf(request.getRole()))
                     .isActive(true)
                     .build();
             userRepository.save(user);

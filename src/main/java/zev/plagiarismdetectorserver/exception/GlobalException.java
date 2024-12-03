@@ -26,9 +26,9 @@ public class GlobalException {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleGlobalRuntimeException(RuntimeException ex){
-        String[] errors = ex.getMessage().split(":");
-        String[] messages = {errors[errors.length-1]};
-        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), messages);
+//        String[] errors = ex.getMessage().split(":");
+//        String[] messages = {errors[errors.length-1]};
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
 
 

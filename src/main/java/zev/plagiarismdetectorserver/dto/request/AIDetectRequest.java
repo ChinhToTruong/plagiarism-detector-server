@@ -5,11 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class AIDetectRequest {
-    @JsonProperty("text")
-    @NotBlank(message = "van ban khong duoc de trong")
-    private String text;
+
+  @JsonProperty("text")
+  @NotBlank(message = "van ban khong duoc de trong")
+  private String text;
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SearchCriteria {
 
-    private String key;  // cac truong du lieu: firstname, lastname, ...
-    private String operator; // toan tu: =, >, <
-    private Object value; // gia tri search
+  private String key;  // cac truong du lieu: firstname, lastname, ...
+  private String operator; // toan tu: =, >, <
+  private Object value; // gia tri search
 }

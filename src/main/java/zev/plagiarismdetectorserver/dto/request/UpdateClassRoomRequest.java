@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class UpdateClassRoomRequest {
 
-    private String name;
+  private String name;
 
-    private String description;
+  private String description;
 }

@@ -6,11 +6,10 @@
 
 ## Requirements
 ***
-* Java 17
-* JDK 21
+* JDK 17
 * Maven 3
 
-## Technical
+## Technical stack
 ***
 * Spring Boot 3
 * Spring Security 6

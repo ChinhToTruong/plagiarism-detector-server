@@ -9,27 +9,26 @@ import zev.plagiarismdetectorserver.anotations.EnumValue;
 import zev.plagiarismdetectorserver.entity.enums.Gender;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpdateProfileUserRequest {
 
-    @NotBlank(message = "first name khong duoc de trong")
-    private String firstName;
+  @NotBlank(message = "first name khong duoc de trong")
+  private String firstName;
 
-    @NotBlank(message = "last name khong duoc de trong")
-    private String lastName;
+  @NotBlank(message = "last name khong duoc de trong")
+  private String lastName;
 
-    private LocalDate dateOfBirth;
+  private LocalDate dateOfBirth;
 
-    private String Address;
+  private String Address;
 
-    @NotBlank(message = "so dien thoai khogn duoc de trong")
-    private String phoneNumber;
+  @NotBlank(message = "so dien thoai khogn duoc de trong")
+  private String phoneNumber;
 
-    @EnumValue(name = "gender", enumClass = Gender.class, message = "must be male, female or other")
-    private String gender;
+  @EnumValue(name = "gender", enumClass = Gender.class, message = "must be male, female or other")
+  private String gender;
 
-    private String avatarUrl;
+  private String avatarUrl;
 }

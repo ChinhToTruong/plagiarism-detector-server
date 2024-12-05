@@ -7,10 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 public class DocumentCreateRequest {
 
-    private String title;
+  private String title;
 
-    private String description;
+  private String description;
 
-    @NotBlank(message = "file not be empty")
-    private MultipartFile file;
+  @NotBlank(message = "file not be empty")
+  private MultipartFile file;
 }

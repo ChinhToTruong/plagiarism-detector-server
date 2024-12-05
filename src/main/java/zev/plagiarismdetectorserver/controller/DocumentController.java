@@ -20,46 +20,68 @@ import java.util.List;
 @Tag(name = "Document Controller")
 @Slf4j(topic = "Document")
 public class DocumentController {
-    private final DocumentService documentService;
 
-    @PostMapping("/add-document")
-    public ResponseData<?> addDocument(DocumentCreateRequest request) {
-        log.info("Add document {}", request);
-        documentService.addDocument(request);
-        return new ResponseData<>("Add document successful");
-    }
+  private final DocumentService documentService;
 
-    @PatchMapping("/update-document/{documentId}")
-    public ResponseData<?> updateDocument(@RequestBody @Valid UpdateDocumentRequest updateDocumentRequest, @PathVariable("documentId") String documentId) {
-        log.info("Update document {}", updateDocumentRequest);
-        documentService.updateDocument(updateDocumentRequest, documentId);
-        return new ResponseData<>("Update document successful");
-    }
+  @PostMapping("/add-document")
+  public ResponseData<?> addDocument(DocumentCreateRequest request) {
 
-    @GetMapping
-    public ResponseData<?> getDocuments(Pageable pageable) {
-        List<Document> documents = documentService.getDocuments(pageable);
-        return new ResponseData<>("Get documents successful", documents);
-    }
+    log.info("Add document {}", request);
 
-    @DeleteMapping("/delete-document")
-    public ResponseData<?> deleteDocumentById(@RequestParam("documentId") String documentId) {
-        log.info("Delete document {}", documentId);
-        documentService.deleteDocument(documentId);
-        return new ResponseData<>("Delete document successful");
-    }
+    documentService.addDocument(request);
 
-    @GetMapping("/{documentId}")
-    public ResponseData<?> getDocumentById(@PathVariable("documentId") String documentId) {
-        log.info("Get document {}", documentId);
-        Document document = documentService.getDocument(documentId);
-        return new ResponseData<>("Get document successful", document);
-    }
+    return new ResponseData<>("Add document successful");
+  }
 
-    @GetMapping("/reference-document/{documentId}")
-    public ResponseData<?> referenceDocument(@PathVariable("documentId") String documentId, @RequestParam("userId") String userId, @RequestParam("reportId") String reportId, @RequestParam("classId") String classId) {
-        log.info("Reference document {}", userId);
-        documentService.addUserReportClassToDocument(userId, reportId, classId, documentId);
-        return new ResponseData<>("Reference document successful");
-    }
+  @PatchMapping("/update-document/{documentId}")
+  public ResponseData<?> updateDocument(
+      @RequestBody @Valid UpdateDocumentRequest updateDocumentRequest,
+      @PathVariable("documentId") String documentId) {
+
+    log.info("Update document {}", updateDocumentRequest);
+
+    documentService.updateDocument(updateDocumentRequest, documentId);
+
+    return new ResponseData<>("Update document successful");
+  }
+
+  @GetMapping
+  public ResponseData<?> getDocuments(Pageable pageable) {
+
+    List<Document> documents = documentService.getDocuments(pageable);
+
+    return new ResponseData<>("Get documents successful", documents);
+  }
+
+  @DeleteMapping("/delete-document")
+  public ResponseData<?> deleteDocumentById(@RequestParam("documentId") String documentId) {
+
+    log.info("Delete document {}", documentId);
+
+    documentService.deleteDocument(documentId);
+
+    return new ResponseData<>("Delete document successful");
+  }
+
+  @GetMapping("/{documentId}")
+  public ResponseData<?> getDocumentById(@PathVariable("documentId") String documentId) {
+
+    log.info("Get document {}", documentId);
+
+    Document document = documentService.getDocument(documentId);
+
+    return new ResponseData<>("Get document successful", document);
+  }
+
+  @GetMapping("/reference-document/{documentId}")
+  public ResponseData<?> referenceDocument(@PathVariable("documentId") String documentId,
+      @RequestParam("userId") String userId, @RequestParam("reportId") String reportId,
+      @RequestParam("classId") String classId) {
+
+    log.info("Reference document {}", userId);
+
+    documentService.addUserReportClassToDocument(userId, reportId, classId, documentId);
+
+    return new ResponseData<>("Reference document successful");
+  }
 }

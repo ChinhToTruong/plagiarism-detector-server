@@ -8,8 +8,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Role {
-    @JsonProperty("student")
-    STUDENT,
-    @JsonProperty("teacher")
-    TEACHER;
+  @JsonProperty("student")
+  STUDENT,
+
+  @JsonProperty("teacher")
+  TEACHER;
 }

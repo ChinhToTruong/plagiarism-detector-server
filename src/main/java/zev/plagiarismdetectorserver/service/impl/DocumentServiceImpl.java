@@ -30,7 +30,7 @@ public class DocumentServiceImpl implements DocumentService {
 
   @Transactional
   @Override
-  public void addDocument(DocumentCreateRequest request) {
+  public String addDocument(DocumentCreateRequest request) {
     log.info("Add document request: {}", request);
 
     boolean isDocumentExited = documentRepository.findByTitle(request.getTitle()).isPresent();
@@ -49,9 +49,10 @@ public class DocumentServiceImpl implements DocumentService {
           .url(url)
           .build();
 
-      documentRepository.save(document);
+      var documentId = documentRepository.save(document).getId();
 
       log.info("Document {} created", document.getTitle());
+      return documentId;
     } catch (Exception e) {
       log.error("add document error");
       throw e;

@@ -7,7 +7,7 @@ import zev.plagiarismdetectorserver.entity.ClassRoom;
 
 public interface ClassRoomService {
 
-  void createNewClassRoom(ClassRoomCreateRequest request);
+  String createNewClassRoom(ClassRoomCreateRequest request);
 
   void updateClassRoom(String classRoomId, UpdateClassRoomRequest request);
 

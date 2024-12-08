@@ -3,6 +3,7 @@ package zev.plagiarismdetectorserver.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zev.plagiarismdetectorserver.dto.request.ClassRoomCreateRequest;
@@ -28,7 +29,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
   @Transactional
   @Override
-  public void createNewClassRoom(ClassRoomCreateRequest request) {
+  public String createNewClassRoom(ClassRoomCreateRequest request) {
     boolean isClassExited = classRoomRepository.findClassRoomByName(request.getName()).isPresent();
 
     if (isClassExited) {
@@ -40,9 +41,9 @@ public class ClassRoomServiceImpl implements ClassRoomService {
           .name(request.getName())
           .description(request.getDescription())
           .build();
-
-      classRoomRepository.save(classRoom);
-      log.info("ClassRoom created: {}", classRoom);
+      var classRoomId = classRoomRepository.save(classRoom).getId();
+      log.info("ClassRoom created: {}", classRoomId);
+      return classRoomId;
     } catch (Exception e) {
       log.error("Creat class room failed");
       throw e;

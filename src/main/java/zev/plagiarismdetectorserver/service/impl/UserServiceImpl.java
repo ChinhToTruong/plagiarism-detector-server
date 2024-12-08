@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public void createUser(AddUserRequest request) {
+  public String createUser(AddUserRequest request) {
     log.info("Creating user: {}", request);
 
     boolean isExistedUser = userRepository.findByEmail(request.getEmail()).isPresent();
@@ -46,10 +46,12 @@ public class UserServiceImpl implements UserService {
           .isActive(true)
           .build();
 
-      userRepository.save(user);
+      var userId = userRepository.save(user).getId();
 
       log.info("Created user: {}", user);
       // send email verify user with kafka
+
+      return userId;
     } catch (Exception e) {
       log.error("Create failed user: {}", request);
       throw e;

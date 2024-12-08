@@ -4,12 +4,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import zev.plagiarismdetectorserver.service.UserService;
@@ -34,7 +34,7 @@ public class AppConfig {
       @Override
       public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("**")
-            .allowedOrigins("http://localhost:8080")
+            .allowedOrigins("*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(false)
@@ -44,17 +44,17 @@ public class AppConfig {
     };
   }
 
-  @Bean
-  public SecurityFilterChain springSecurityFilterChain(@NonNull HttpSecurity http)
-      throws Exception {
-
-    http.csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests(request -> request
-            .requestMatchers(WHITE_LIST).permitAll()
-            .anyRequest().authenticated());
-
-    return http.build();
-  }
+//  @Bean
+//  public SecurityFilterChain springSecurityFilterChain(@NonNull HttpSecurity http)
+//      throws Exception {
+//
+//    http.csrf(AbstractHttpConfigurer::disable)
+//        .authorizeHttpRequests(request -> request
+//            .requestMatchers(WHITE_LIST).permitAll()
+//            .anyRequest().authenticated());
+//
+//    return http.build();
+//  }
 //
 //    @Bean
 //    public AuthenticationProvider providerManager() {
@@ -76,9 +76,9 @@ public class AppConfig {
 //                .requestMatchers("/v3/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**");
 //    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(10);
-  }
+//  @Bean
+//  public PasswordEncoder passwordEncoder() {
+//    return new BCryptPasswordEncoder(10);
+//  }
 
 }

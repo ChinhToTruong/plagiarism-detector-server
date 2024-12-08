@@ -9,7 +9,7 @@ import zev.plagiarismdetectorserver.entity.User;
 
 public interface UserService {
 
-  void createUser(AddUserRequest request);
+  String createUser(AddUserRequest request);
 
   void updateUserByUserId(UpdateProfileUserRequest request, String userId);
 

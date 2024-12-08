@@ -8,7 +8,7 @@ import zev.plagiarismdetectorserver.entity.Document;
 
 public interface DocumentService {
 
-  void addDocument(DocumentCreateRequest document);
+  String addDocument(DocumentCreateRequest document);
 
   void updateDocument(UpdateDocumentRequest request, String documentId);
 

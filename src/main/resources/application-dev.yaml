@@ -31,4 +31,6 @@ plagiarism-search:
   host: ${PLAGIARISM_HOST:https://plagiarismsearch.com/api/v3}
   token: ${PLAGIARISM_EMAIL:totruongchinh@gmail.com}:${PLAGIARISM_TOKEN:iqsq17umPX5hJmqMleQSwLHpN6bW7Pdc4eWNLUuCMmwruUnv-214671387}
 
-
+jwt:
+  secret-key: d29175cc8e31b7c3fc9d3d16562bb8495b9c6e90174f299cb59514d8f2fd56dc
+  time-expired: 360000

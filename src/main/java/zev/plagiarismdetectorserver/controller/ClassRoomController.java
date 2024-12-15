@@ -1,6 +1,7 @@
 package zev.plagiarismdetectorserver.controller;
 
 import jakarta.validation.Valid;
+import java.io.Serializable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

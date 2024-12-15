@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import zev.plagiarismdetectorserver.dto.request.AIDetectRequest;
 import zev.plagiarismdetectorserver.dto.response.ResponseData;
 import zev.plagiarismdetectorserver.service.PlagiarismService;
@@ -25,13 +24,13 @@ public class PlagiarismController {
 
   private final PlagiarismService plagiarismService;
 
-  @PostMapping("/add-document")
-  public ResponseData<?> detectDocument(@RequestBody @Valid
-  AIDetectRequest request, @PathVariable(name = "file", required = false) MultipartFile file) {
+  @PostMapping(value = "/add-document")
+  public ResponseData<?> detectDocument(
+      @RequestBody @Valid AIDetectRequest request) {
 
     log.info("Detect document");
 
-    String id = plagiarismService.submitCopyCheckReport(request, file).getData().get("id")
+    String id = plagiarismService.submitCopyCheckReport(request).getData().get("id")
         .toString();
 
     return new ResponseData<>("detected", id);
@@ -39,7 +38,7 @@ public class PlagiarismController {
 
   @GetMapping("/{documentId}")
   public ResponseData<?> getDocument(
-      @PathVariable(name = "documentId", required = true) String documentId) {
+      @PathVariable(name = "documentId") String documentId) {
     log.info("Get document");
 
     var data = plagiarismService.getCopyCheckReportById(documentId);

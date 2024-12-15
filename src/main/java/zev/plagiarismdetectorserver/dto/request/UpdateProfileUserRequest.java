@@ -2,6 +2,7 @@ package zev.plagiarismdetectorserver.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UpdateProfileUserRequest {
+public class UpdateProfileUserRequest implements Serializable {
 
   @NotBlank(message = "first name khong duoc de trong")
   private String firstName;

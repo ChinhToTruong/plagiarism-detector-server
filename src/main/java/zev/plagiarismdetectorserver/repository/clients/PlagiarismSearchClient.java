@@ -34,7 +34,7 @@ public interface PlagiarismSearchClient {
 
   @PostMapping(value = "/reports/create")
   AIDetectReportResponse submitCopyCheckReport(@RequestHeader("Authorization") String token,
-      @RequestBody AIDetectRequest text);
+      @RequestBody AIDetectRequest body);
 
   @PostMapping(value = "/reports/create")
   AIDetectReportResponse submitCopyCheckReport(@RequestHeader("Authorization") String token,

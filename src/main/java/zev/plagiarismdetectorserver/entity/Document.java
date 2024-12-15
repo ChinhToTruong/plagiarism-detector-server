@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +26,7 @@ import zev.plagiarismdetectorserver.entity.enums.DocumentStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Document extends AbstractEntity {
+public class Document extends AbstractEntity implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

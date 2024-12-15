@@ -1,9 +1,10 @@
 package zev.plagiarismdetectorserver.dto.request;
 
+import java.io.Serializable;
 import lombok.Getter;
 
 @Getter
-public class UpdateDocumentRequest {
+public class UpdateDocumentRequest implements Serializable {
 
   private String title;
 

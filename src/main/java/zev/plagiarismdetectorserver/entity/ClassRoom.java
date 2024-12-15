@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ClassRoom extends AbstractEntity {
+public class ClassRoom extends AbstractEntity implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

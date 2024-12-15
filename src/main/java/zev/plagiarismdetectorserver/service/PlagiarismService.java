@@ -7,7 +7,7 @@ import zev.plagiarismdetectorserver.dto.response.AIDetectReportResponse;
 
 public interface PlagiarismService {
 
-  AIDetectReportResponse submitCopyCheckReport(AIDetectRequest text, MultipartFile file);
+  AIDetectReportResponse submitCopyCheckReport(AIDetectRequest request);
 
   AIDetectReportResponse getCopyCheckReportById(String id);
 }

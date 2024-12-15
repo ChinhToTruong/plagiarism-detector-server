@@ -1,6 +1,7 @@
 package zev.plagiarismdetectorserver.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResponseData<T> {
+public class ResponseData<T> implements Serializable {
 
   private int statusCode = 200;
   private String[] messages;

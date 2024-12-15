@@ -1,10 +1,11 @@
 package zev.plagiarismdetectorserver.dto.response;
 
+import java.io.Serializable;
 import lombok.Setter;
 
 
 @Setter
-public class ErrorResponse extends ResponseData {
+public class ErrorResponse extends ResponseData implements Serializable {
 
   private int statusCode = 400;
 

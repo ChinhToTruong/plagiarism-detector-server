@@ -89,4 +89,10 @@ public class GlobalException {
   public ErrorResponse handleDocumentEmpty(DocumentEmpty ex) {
     return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ErrorCode.DOCUMENT_EMPTY.getErrors());
   }
+
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  @ExceptionHandler(SecurityException.class)
+  public ErrorResponse handleSecurityException(SecurityException ex) {
+    return new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), ErrorCode.NOT_ALLOWED.getErrors());
+  }
 }

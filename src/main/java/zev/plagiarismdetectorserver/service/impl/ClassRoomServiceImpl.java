@@ -3,11 +3,11 @@ package zev.plagiarismdetectorserver.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zev.plagiarismdetectorserver.dto.request.ClassRoomCreateRequest;
 import zev.plagiarismdetectorserver.dto.request.UpdateClassRoomRequest;
+import zev.plagiarismdetectorserver.dto.response.ClassDetailsResponse;
 import zev.plagiarismdetectorserver.entity.ClassRoom;
 import zev.plagiarismdetectorserver.entity.User;
 import zev.plagiarismdetectorserver.exception.ClassNotFound;
@@ -16,8 +16,10 @@ import zev.plagiarismdetectorserver.exception.UserInClassRoom;
 import zev.plagiarismdetectorserver.exception.UserNotFound;
 import zev.plagiarismdetectorserver.exception.UserNotInClassRoom;
 import zev.plagiarismdetectorserver.repository.ClassRoomRepository;
+import zev.plagiarismdetectorserver.repository.DocumentRepository;
 import zev.plagiarismdetectorserver.repository.UserRepository;
 import zev.plagiarismdetectorserver.service.ClassRoomService;
+import zev.plagiarismdetectorserver.service.DocumentService;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
   private final ClassRoomRepository classRoomRepository;
   private final UserRepository userRepository;
+  private final DocumentRepository documentRepository;
 
   @Transactional
   @Override
@@ -91,8 +94,14 @@ public class ClassRoomServiceImpl implements ClassRoomService {
   }
 
   @Override
-  public ClassRoom getClassRoom(String classRoomId) {
-    return findClassRoomById(classRoomId);
+  public ClassDetailsResponse getClassRoom(String classRoomId) {
+    ClassRoom classRoom = findClassRoomById(classRoomId);
+    var response = ClassDetailsResponse.builder()
+        .className(classRoom.getName())
+        .description(classRoom.getDescription())
+        .teacherName(userRepository.findTeacherByClassRoomId(classRoomId))
+        .documents(documentRepository.findAllByClassId(classRoomId))
+        .build();
   }
 
   @Override

@@ -6,8 +6,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import zev.plagiarismdetectorserver.dto.request.AddUserRequest;
@@ -29,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
   private final SearchRepository searchRepository;
-  private final PasswordEncoder passwordEncoder;
 
   @Override
   @Transactional
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
     try {
       User user = User.builder()
           .email(request.getEmail())
-          .password(passwordEncoder.encode(request.getPassword()))
+          .password(request.getPassword())
           .role(Role.valueOf(request.getRole()))
           .isActive(true)
           .build();

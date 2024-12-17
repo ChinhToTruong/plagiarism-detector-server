@@ -2,8 +2,7 @@ package zev.plagiarismdetectorserver.service;
 
 import java.util.List;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import zev.plagiarismdetectorserver.dto.request.AddUserRequest;
 import zev.plagiarismdetectorserver.dto.request.UpdateProfileUserRequest;
 import zev.plagiarismdetectorserver.dto.response.ResponseData;

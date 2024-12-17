@@ -28,7 +28,7 @@ public interface PlagiarismSearchClient {
 
 
   // Api plagiarism detect with copy-resource method
-  @GetMapping(value = "/reports/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/reports/html/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
   AIDetectReportResponse getCopyCheckReportById(@RequestHeader("Authorization") String token,
       @PathVariable String id);
 

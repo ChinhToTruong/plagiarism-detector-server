@@ -88,9 +88,9 @@ public class ClassRoomController {
 
     log.info("get class room by id: {}", classRoomId);
 
-    ClassRoom classRoom = classRoomService.getClassRoom(classRoomId);
+//    ClassRoom classRoom = classRoomService.getClassRoom(classRoomId);
 
-    return new ResponseData<>("get class room successfully.", classRoom);
+    return new ResponseData<>("get class room successfully.", null);
   }
 
 }

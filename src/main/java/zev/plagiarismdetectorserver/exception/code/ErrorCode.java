@@ -12,7 +12,6 @@ public enum ErrorCode {
   // user response code
   USER_ALREADY_EXISTS(1, HttpStatus.BAD_REQUEST, new String[]{"user already exists"}),
   USER_NOT_FOUND(2, HttpStatus.NOT_FOUND, new String[]{"user not found"}),
-
   USER_IN_CLASS(6, HttpStatus.BAD_REQUEST, new String[]{"user in class"}),
   USER_NOT_IN_CLASS(7, HttpStatus.BAD_REQUEST, new String[]{"user not in class"}),
 
@@ -27,7 +26,8 @@ public enum ErrorCode {
   // document response code
   DOCUMENT_NOT_FOUND(8, HttpStatus.NOT_FOUND, new String[]{"document not found"}),
   DOCUMENT_EXITED(9, HttpStatus.INTERNAL_SERVER_ERROR, new String[]{"document exited"}),
-  DOCUMENT_EMPTY(10, HttpStatus.BAD_REQUEST, new String[]{"document is empty"}),
+  DOCUMENT_EMPTY(10, HttpStatus.NO_CONTENT, new String[]{"document is empty"}),
+
   ;
 
   private final int code;

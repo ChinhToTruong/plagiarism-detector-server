@@ -26,7 +26,7 @@ public class DocumentServiceImpl implements DocumentService {
   private final DocumentRepository documentRepository;
   private final PlagiarismService plagiarismService;
   private final UserService userService;
-  private final ClassRoomService classRoomService;
+
 
   @Transactional
   @Override
@@ -132,7 +132,7 @@ public class DocumentServiceImpl implements DocumentService {
     Document document = findById(documentId);
 
     document.setReportId(reportId);
-    document.setClassRoom(classRoomService.getClassRoom(classId));
+//    document.setClassRoom(classRoomService.getClassRoom(classId));
 
     try {
 

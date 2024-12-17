@@ -96,12 +96,13 @@ public class ClassRoomServiceImpl implements ClassRoomService {
   @Override
   public ClassDetailsResponse getClassRoom(String classRoomId) {
     ClassRoom classRoom = findClassRoomById(classRoomId);
-    var response = ClassDetailsResponse.builder()
-        .className(classRoom.getName())
-        .description(classRoom.getDescription())
-        .teacherName(userRepository.findTeacherByClassRoomId(classRoomId))
-        .documents(documentRepository.findAllByClassId(classRoomId))
-        .build();
+//    var response = ClassDetailsResponse.builder()
+//        .className(classRoom.getName())
+//        .description(classRoom.getDescription())
+//        .teacherName(userRepository.findTeacherByClassRoomId(classRoomId))
+//        .documents(documentRepository.findAllByClassId(classRoomId))
+//        .build();
+    return null;
   }
 
   @Override

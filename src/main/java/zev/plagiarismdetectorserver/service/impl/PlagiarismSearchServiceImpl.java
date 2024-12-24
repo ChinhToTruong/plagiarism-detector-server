@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import zev.plagiarismdetectorserver.dto.request.AIDetectRequest;
 import zev.plagiarismdetectorserver.dto.response.AIDetectReportResponse;
 import zev.plagiarismdetectorserver.entity.Document;
+import zev.plagiarismdetectorserver.entity.enums.DocumentStatus;
 import zev.plagiarismdetectorserver.exception.DocumentEmpty;
 import zev.plagiarismdetectorserver.repository.DocumentRepository;
 import zev.plagiarismdetectorserver.repository.clients.PlagiarismSearchClient;
@@ -44,27 +45,34 @@ public class PlagiarismSearchServiceImpl implements PlagiarismService {
     AIDetectReportResponse response = new AIDetectReportResponse();
 
     // check report title is existed (url, text or file is save as title report)
-    if (request.getUrl() == null || request.getTitle() == null || request.getFile() == null) {
+    if (request.getUrl() == null && request.getTitle() == null && request.getFile() == null) {
 
       throw new DocumentEmpty();
     }
-    // get document
+    // get documentthrow new DocumentEmpty();
+
+    log.info("title: {}", request.getUrl());
     Optional<Document> finByUrl = documentRepository.findByTitle(request.getUrl());
-    Optional<Document> finByFile = documentRepository.findByTitle(request.getFile().getName());
+//    Optional<Document> finByFile = documentRepository.findByTitle(request.getFile().getName());
     Optional<Document> finByText = documentRepository.findByTitle(request.getText());
 
-    // if found -> return report id
     if (finByUrl.isPresent()) {
 
-      response = getCopyCheckReportById(finByUrl.get().getReportId());
+      return getCopyCheckReportById(finByUrl.get().getReportId());
+    }
+    if (finByText.isPresent()) {
+      return getCopyCheckReportById(finByText.get().getReportId());
     }
 
     // if not found -> do plagiarism and save document to storage
     response = plagiarismSearchClient.submitCopyCheckReport(token, request);
 
+    log.info("data: {}, {}", response.getData().get("id"), response.getData().get("title"));
+
     var newDocument = Document.builder()
         .title(response.getData().get("title").toString())
         .reportId(response.getData().get("id").toString())
+        .status(DocumentStatus.SUCCESS)
         .build();
     documentRepository.save(newDocument);
 
